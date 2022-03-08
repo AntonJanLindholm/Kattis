@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+
+int main(){
+
+  long long int input, input2;
+  long long int result;
+  while(std::cin >>input>> input2){
+    getchar();
+    if(input > input2){
+      result = input - input2;
+    }else{
+      result = input2 - input;
+    }
+    std::cout << result << '\n';
+    input = 0;
+    input2 = 0;
+    result = 0;
+  }
+
+}
