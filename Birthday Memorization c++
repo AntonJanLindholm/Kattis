@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Person{
+  int likes;
+  int DD;
+  int MM;
+  std::string firstname;
+  bool boolean = true;
+
+};
+
+
+
+
+int main(){
+
+
+
+  int n;
+  int counter = 0;
+  struct Person p[2000];
+  string temp, temp2;
+
+  cin>>n;
+
+
+  if(n < 1 || n > 2000){
+    exit(1);
+  }
+
+  for(int i = 0; i<n; i++){
+    cin>>p[i].firstname>>p[i].likes;
+    if(islower(p[i].firstname[0])  || isupper(p[i].firstname[n + 1]) ){
+      exit(1);
+    }
+    p[i].firstname[0] = toupper(p[i].firstname[0]);
+
+    cin>>p[i].DD;
+    if(std::cin.get() != '/'){
+      std::cout << "expected / \n";
+      return 1;
+    }
+    cin>>p[i].MM;
+
+    if(p[i].DD < 1 || p[i].DD > 31 || p[i].MM < 1 || p[i].MM > 12 || p[i].firstname.length() < 1 || p[i].firstname.length() > 10 || p[i].likes < 0 || p[i].likes > 100000 ){
+      exit(1);
+    }
+
+
+  }
+
+
+
+  for(int i = 0; i < n; i++){
+    for(int j = i + 1 ; j < n; j++){
+      if(p[i].likes == p[j].likes){
+        exit(1);
+      }
+      if(p[i].DD == p[j].DD && p[i].MM == p[j].MM){
+        if(p[i].likes > p[j].likes){
+
+          //std::cout  << "\n" << p[i].firstname <<endl;
+        //  temp = p[i].firstname;
+          p[j].boolean = false;
+        }else if(p[i].likes < p[j].likes){
+          //std::cout  << "\n" << p[j].firstname << endl;
+          p[i].boolean = false;
+        //  temp = p[j].firstname;
+        }
+      }//else{
+      //  std::cout << "\n" << p[i].firstname <<endl;
+      //  temp = p[i].firstname;
+    //  }
+    }
+  }
+  //std::cout << p[0].boolean  << p[0].firstname<<endl;
+
+
+  // Bubble Sort
+  for(int i = 0; i < n-1; ++i){
+  if(p[i].boolean == true){
+  for(int j = i+1; j < n; ++j) {
+  if(p[j].boolean == true){
+     if(p[i].firstname > p[j].firstname) {
+        temp2 = p[i].firstname;
+        p[i].firstname = p[j].firstname;
+        p[j].firstname = temp2;
+        }
+      }
+     }
+   }
+}
+for(int i = 0; i < n; i++){
+  if(p[i].boolean == true){
+    counter += 1;
+  }
+//  std::cout <<"temp value --> "<< temp <<endl;
+}
+
+std::cout << counter <<endl;
+  for(int i = 0; i < n; i++){
+    if(p[i].boolean == true){
+      std::cout << p[i].firstname <<endl;
+    }
+  //  std::cout <<"temp value --> "<< temp <<endl;
+  }
+
+    return 0;
+}
