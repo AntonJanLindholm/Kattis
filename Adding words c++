@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string>
+#include<sstream>
+#include <map>
+using namespace std;
+
+
+map<string, int>variable;
+map<int, string>value;
+
+
+string expand(string input_string){
+    string variable_names;
+    string re;
+    istringstream iss(input_string.substr(1));
+    //std::cout << "iss-->" << (input_string.substr(1))<< '\n';
+    string answer="";
+    char plus = '+';
+    int sum = 0;
+    while(iss>>variable_names){
+        //std::cout << "variable_names-->" << variable_names<< '\n';
+        if(variable.find(variable_names) != variable.end()){
+            if(plus == '+'){
+                sum += variable[variable_names];
+
+            }else if(plus == '-'){
+                sum -= variable[variable_names];
+            }
+        }else{
+            re = input_string.substr(1) + " " + "unknown";
+            return re;
+        }
+        iss >> plus;
+    }
+    if(value.find(sum)!= value.end()){
+        
+        answer = value[sum];
+        //std::cout << "test" << answer<< '\n';
+    }else{
+        answer="unknown";
+    }
+    re = (input_string.substr(1) + " " + answer);
+    //std::cout << "re" << re<< '\n';
+    return re;
+
+}
+
+int main(){
+    string input;
+
+    while(cin>>input){
+    if(input.compare("def") == 0){
+        string char_value;
+        int int_value;
+        cin>>char_value>>int_value;
+
+        if(variable.find(char_value) != variable.end()){
+            int temp = variable[char_value];
+            variable.erase(char_value);
+            value.erase(temp);
+
+        }
+        variable[char_value] = int_value;
+        value[int_value] = char_value;
+
+    }
+    
+    else if(input.compare("calc") == 0){
+        string input;
+        getline(cin,input);
+        
+        string answer = expand(input);
+        cout << answer <<endl;
+
+    }
+    else if(input.compare("clear")==0){
+        variable.clear();
+        value.clear();
+    }
+}
+    return 0;
+}
