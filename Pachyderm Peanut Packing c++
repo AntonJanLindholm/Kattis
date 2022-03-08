@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    // #ifndef TESTING
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    // #endif
+
+    int nBoxes;
+    while(true){
+        cin >> nBoxes;
+        if(nBoxes == 0){
+            break;
+        }
+        double x1, y1, x2, y2;
+        string size;
+        double boxes[nBoxes][4];
+        string boxNames[nBoxes];
+        int totalBoxes = nBoxes;
+        while(nBoxes--){
+            cin >> x1 >> y1 >> x2 >> y2 >> size;
+            boxNames[nBoxes] = size;
+            boxes[nBoxes][0] = x1;
+            boxes[nBoxes][1] = x2;
+            boxes[nBoxes][2] = y1;
+            boxes[nBoxes][3] = y2;
+        }
+        int peanuts;
+        cin >> peanuts;
+        while(peanuts--){
+            double x, y;
+            cin >> x >> y >> size;
+            bool placed = false;
+            for(int i = 0; i < totalBoxes; i++){
+                if(boxes[i][0] <= x && boxes[i][1] >= x && boxes[i][2] <= y && boxes[i][3] >= y){
+                    placed = true;
+                    if(boxNames[i] == size){
+                        cout << size << " correct" << endl;
+                    } else {
+                        cout << size << " " << boxNames[i] << endl;
+                    }
+                    break;
+                }
+            }
+            if(!placed){
+                cout << size << " " << "floor" << endl;
+            }
+        }
+        cout << endl;
+    }
+    
+    return 0;   
+}
