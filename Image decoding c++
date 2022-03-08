@@ -1,0 +1,112 @@
+#include <iostream>
+using namespace std;
+
+int int_input_(int& num) {       //function for int input, https://stackoverflow.com/questions/22440260/reading-numbers-with-getchar-in-c
+    int int_input = getchar();
+    num = 0;
+    for(;int_input>47 && int_input<58; int_input = getchar())
+  {
+    num = num *10 + int_input - '0';
+  }
+    return int_input;
+}
+
+
+int main(){
+    int int_input,sum,value,total;
+  int firstImage = 1;
+  int image = 0;
+  string print;
+  char char_input;
+    cin >> int_input;
+    getchar();
+
+
+  while(int_input) {
+    print = "";
+    image = 1;
+    sum = 0;
+    value = 0;
+    total = 0;
+
+    if(int_input < 0 && int_input > 100){
+      return 0;
+    }
+
+    char_input = getchar();
+        getchar();
+
+
+    while(int_input_(value) != '\n') {
+            sum = sum + value;
+            for(int i = 0; i < value; i++) {
+                print = print + char_input;
+            }
+
+    if(char_input=='#'){
+      char_input = '.';
+    }else{
+      char_input = '#';
+      }
+        }
+        sum = sum + value;
+
+
+        for(int i = 0; i < value; i++) {
+            print = print + char_input;
+        }
+        print = print + '\n';
+        int_input = int_input-1;
+
+
+        while(int_input != 0) {
+
+            char_input = getchar();
+            getchar();
+
+            while(int_input_(value) != '\n') {
+                total = total + value;
+                for(int i = 0; i < value; i++) {
+                    print = print + char_input;
+                }
+        if(char_input=='.'){
+          char_input = '#';
+        }else{
+          char_input = '.';
+        }
+            }
+
+            total = total + value;
+            for(int i = 0; i < value; i++) {
+                print = print + char_input;
+            }
+            print = print + '\n';
+
+        if(sum != total)
+    {
+      image = 0;
+    }
+            total = 0;
+            int_input = int_input - 1;
+        }
+
+        cin >> int_input;
+        getchar();
+
+        if(firstImage != 1 ) {
+            cout << "\n";
+        }else
+    {
+      firstImage = 0;
+    }
+
+    if(image == 0){
+       print = print + "Error decoding image\n";
+     }
+
+        cout << print;
+    }
+
+    return 0;
+
+}
