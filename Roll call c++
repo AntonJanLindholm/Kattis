@@ -1,0 +1,66 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+
+using namespace std;
+
+typedef struct Person
+{
+    string firstname;
+    string lastname;
+  int marked = 0;
+}Student;
+
+
+
+bool compare_lastname( Student a, Student b){
+   if(a.lastname == b.lastname){
+     return a.firstname < b.firstname;
+   }
+
+    if(a.lastname < b.lastname){
+        return 1;
+  }
+    else{
+        return 0;
+  }
+}
+
+int main()
+{
+    int i = 0;
+  string first,last;
+
+    Student p[1000];
+
+
+  int n = 0;
+    while(cin>>first>>last){
+        getchar();
+    p[i].firstname = first;
+    p[i].lastname = last;
+    n += 1;
+    i++;
+    }
+
+    sort(p, p+n, compare_lastname);
+
+
+  for(int i = 0; i < n;i++){
+    for(int j = i + 1; j < n; j++){
+      if(p[j].firstname == p[i].firstname){
+      p[j].marked = 1;
+      p[i].marked = 1;
+      }
+    }
+  }
+
+
+      for(int i = 0; i < n; i++) {
+        cout << p[i].firstname;
+    if(p[i].marked == 1){
+      cout<<" " << p[i].lastname;
+    }
+ cout << endl;
+}
+}
